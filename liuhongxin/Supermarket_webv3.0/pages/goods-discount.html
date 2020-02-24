@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>商品折扣-超市管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+    <script src="../layui/layui.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+  </head>
+  
+  <body class="layui-anim layui-anim-up">
+    <!-- 商品刷新 -->
+    <div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a><cite>商品折扣清单</cite></a>
+      </span>
+      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新" >
+        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
+    </div>
+    <!-- 商品查询 -->
+    <div class="x-body">
+      <div class="layui-row" style="text-align: center;">
+        <form class="layui-form layui-col-md12 x-so" action="" method="post">
+          <input class="layui-input" placeholder="开始日期" id="disStart" name="dis_Start">
+          <input class="layui-input" placeholder="截止日期" id="disEnd" name="dis_End">
+          <input class="layui-input" type="text" name="goodsID"  placeholder="请输入商品编号" autocomplete="off" >
+          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+      </div>
+      <xblock>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()">
+          <i class="iconfont">&#xe69d;</i>批量删除
+        </button>
+        <button class="layui-btn" onclick="x_admin_show('添加折扣商品','./goods-addDis.html',800,600)">
+          <i class="iconfont">&#xe6b9;</i>添加折扣商品
+        </button>
+        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+      </xblock>
+      <!-- 表格信息 -->
+      <table class="layui-table">
+        <!-- 表头 -->
+        <thead>
+          <tr>
+            <th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>商品ID</th>
+            <th>商品名称</th>
+            <th>商品分类</th>
+            <th>折扣价</th>
+            <th>原价</th>
+            <th>生产批号</th>
+            <th>起始日</th>
+            <th>截止日</th>
+            <th>过期日期</th>
+            <th>备注</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <!-- 表单条数据 -->
+        <!-- 包含图标说明 -->
+        <tbody>
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2' >
+                <i class="layui-icon">&#xe605;</i>
+              </div>
+            </td>
+            <td>000001</td>
+            <td>百事可乐</td>
+            <td>饮料</td>
+            <td>1.80</td>
+            <td>2.80</td>
+            <td>20191016</td>
+            <td>2020-02-10</td>
+            <td>2020-02-17</td>
+            <td>2020-02-20</td>
+            <td>快过期，搞促销</td>
+            <!-- 商品操作 -->
+            <td class="td-manage">
+              <a title="编辑" class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                编辑
+              </a>
+              <a title="删除" class="layui-btn layui-btn-sm layui-btn-danger" onclick="dis_del(this,'要删除的id')" href="javascript:;">
+                删除
+              </a>
+            </td>
+          </tr>
+          <!-- 表单条数据 -->
+          <!-- 图标 -->
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>000002</td>
+            <td>可口可乐</td>
+            <td>饮料</td>
+            <td>1.80</td>
+            <td>2.50</td>
+            <td>20191126</td>
+            <td>2020-02-10</td>
+            <td>2020-02-17</td>
+            <td>2020-02-20</td>
+            <td>快过期，搞促销</td>
+            <td class="td-manage">
+              <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+              </a>
+              <a title="删除" onclick="dis_del(this,'要删除的id')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            </td>
+          </tr>
+          <!-- 表单条数据 -->
+          <!-- 图标 -->
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>000003</td>
+            <td>农夫山泉</td>
+            <td>饮料</td>
+            <td>1.50</td>
+            <td>1.80</td>
+            <td>20191207</td>
+            <td>2020-02-10</td>
+            <td>2020-02-17</td>
+            <td>2020-02-20</td>
+            <td>快过期，搞促销</td>
+            <td class="td-manage">
+              <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+              </a>
+              <a title="删除" onclick="dis_del(this,'要删除的id')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 表格信息结束  -->
+      <!-- 翻页 -->
+      <div id="dis-list" style="text-align: center;"></div>
+      <!-- 页面管理结束 -->
+    </div>
+    <script>
+      layui.use(['laypage','laydate'],function(){
+      var laypage = layui.laypage;
+      var laydate = layui.laydate;
+      //执行一个laydate实例
+        laydate.render({
+          elem: '#disStart' //指定打折开始日期元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#disEnd' //指定结束日期元素
+        });
+      //执行一个laypage实例
+      //'count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip',
+      laypage.render({
+        elem: 'dis-list' //注意，这里的是 ID，不用加 # 号
+        ,count: 50 //数据总数，从服务端得到
+        ,skin: 'row' //表格风格
+        ,even: true
+        ,size: 'lg' //尺寸
+        ,page: true //是否显示分页
+        ,limits: [2,4,6]
+        ,curr:2
+        ,limit: 10 //每页默认显示的数量
+        ,layout: ['prev', 'page', 'next', 'count', 'limit', 'skip']
+        ,jump: function(obj,first){
+                    //obj包含了当前分页的所有参数，比如：
+                    // console.log(obj.curr);  //得到当前页，以便向服务端请求对应页的数据。
+                    // console.log(obj.limit); //得到每页显示的条数
+                    //首次不执行,使用原始的curr,后面需要自己通过回传来更新
+                    if(!first){
+                        // location.href='goods-disocunt.php?&page='+obj.curr+'&pagesize='+obj.limit;
+                    }
+                }
+
+      });
+
+
+});
+
+      /*折扣商品-删除*/
+      function dis_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+      /*折扣商品-批量删除*/
+      function delAll (argument) {
+        var idSet = tableCheck.getData();
+        layer.confirm('确认要删除吗？'+idSet,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+    </script>
+  </body>
+
+</html>

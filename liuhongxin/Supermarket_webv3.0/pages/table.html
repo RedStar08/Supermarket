@@ -1,0 +1,162 @@
+ 
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>表格操作 - layui</title>
+
+<link rel="stylesheet" href="../layui/css/layui.css">
+<script src="../layui/layui.js"charset="utf-8"></script>
+<style>
+body{padding: 20px; /*overflow-y: scroll;*/}
+</style>
+</head>
+<body>
+      <div>
+   <!-- 表格信息 -->
+      <table class="layui-table" id="goods-lists" lay-filter="demo">
+        <!-- 表头 -->
+        <thead>
+          <tr>
+            <th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th lay-data="{field:'username', width:100}">商品ID</th>
+            <th>商品名称</th>
+            <th>商品分类</th>
+            <th>零售价</th>
+            <th>规格</th>
+            <th>保质期</th>
+            <th>备注</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <!-- 表单条数据 -->
+        <!-- 包含图标说明 -->
+        <tbody>
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'>
+                <i class="layui-icon">&#xe605;</i>
+              </div>
+            </td>
+            <td>000001</td>
+            <td>百事可乐</td>
+            <td>饮料</td>
+            <td>3.00</td>
+            <td>瓶</td>
+            <td>6个月</td>
+            <td>夏季可适当增加采购量</td>
+            <!-- 商品操作 -->
+            <td class="td-status">
+              <span class="layui-btn layui-btn-normal layui-btn-sm">正上架</span></td>
+            <td class="td-manage">
+              <a onclick="member_stop(this,'10001')" class="layui-btn layui-btn-sm layui-btn-primary" href="javascript:;"  title="上架">
+              上下架
+              </a>
+              <a title="编辑" class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                编辑
+              </a>
+              <a title="删除" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                删除
+              </a>
+            </td>
+          </tr>
+          <!-- 表单条数据 -->
+          <!-- 图标 -->
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>000002</td>
+            <td>可口可乐</td>
+            <td>饮料</td>
+            <td>3.00</td>
+            <td>瓶</td>
+            <td>6个月</td>
+            <td>夏季可适当增加采购量</td>
+            <td class="td-status">
+              <span class="layui-btn layui-btn-normal layui-btn-sm">正上架</span></td>
+            <td class="td-manage">
+              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="上架">
+                <i class="layui-icon">&#xe601;</i>
+              </a>
+              <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+              </a>
+              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            </td>
+          </tr>
+          <!-- 表单条数据 -->
+          <!-- 图标 -->
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'>
+                <i class="layui-icon">&#xe605;</i>
+              </div>
+            </td>
+            <td>000003</td>
+            <td>农夫山泉</td>
+            <td>饮料</td>
+            <td>2.00</td>
+            <td>瓶</td>
+            <td>6个月</td>
+            <td>夏季可适当增加采购量</td>
+            <td class="td-status">
+              <span class="layui-btn layui-btn-normal layui-btn-sm">正上架</span></td>
+            <td class="td-manage">
+              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="上架">
+                <i class="layui-icon">&#xe601;</i>
+              </a>
+              <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe642;</i>
+              </a>
+              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                <i class="layui-icon">&#xe640;</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id ="good-page" style="text-align: center;"></div>
+<script>
+  layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  //'count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip',
+  laypage.render({
+    elem: 'good-page' //注意，这里的 test1 是 ID，不用加 # 号
+    ,count: 30 //数据总数，从服务端得到
+    ,skin: 'row' //表格风格
+    ,even: true
+    //,size: 'lg' //尺寸
+    
+    ,page: true //是否显示分页
+    ,limits: [10,20,50]
+    ,limit: 10 //每页默认显示的数量
+    ,layout: ['prev', 'page', 'next', 'count', 'limit', 'skip']
+    ,jump: function(obj){
+                //obj包含了当前分页的所有参数，比如：
+                console.log(obj.curr);  //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+                //首次不执行,使用原始的curr,后面需要自己通过回传来更新
+                // var curr = obj.curr;
+                // if(!first){
+                //     location.href='index.php?&a=adminLogList&page='+obj.curr;
+                // }
+            }
+
+  });
+
+});
+
+</script>
+</body>
+</html>
