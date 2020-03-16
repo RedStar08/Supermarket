@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>仓库添加-超市后台管理系统</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+  </head>
+  
+  <body>
+    <div class="x-body">
+        <form class="layui-form" action="action-add.php" method="post" style="margin-left: 20%">
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storeID">
+                  <span class="x-red">*</span>仓库ID
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storeID" name="storeID" required lay-verify="number|storeID"
+                  value="" autocomplete="off" placeholder="请输入仓库ID" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storeName">
+                  <span class="x-red">*</span>仓库名称
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storeName" name="storeName" required lay-verify="required"
+                  value="" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storeNum">
+                  <span class="x-red">*</span>已用容量
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storeNum" name="storeNum" required lay-verify="storeNum|required"
+                  value="" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storeMax">
+                  <span class="x-red">*</span>仓库容量
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storeMax" name="storeMax" required lay-verify="storeMax|required"
+                  value="" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storeManager">
+                  <span class="x-red">*</span>负责人ID
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storeManager" name="storeManager" required lay-verify="userID|required"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label" for="storePhone">
+                  <span class="x-red">*</span>联系方式
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="storePhone" name="storePhone" required lay-verify="required|phone"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item" id="x-city"  style="width: 70%">
+            <label class="layui-form-label">
+                  <span class="x-red">*</span>仓库地址
+            </label>
+            <div class="layui-input-inline" style="width: 20%">
+              <select id="province" name="province" lay-filter="province" required lay-verify="required"> 
+                <option value="">请选择省</option>
+              </select>
+            </div>
+            <div class="layui-input-inline" style="width: 20%">
+              <select id="city" name="city" lay-filter="city" required lay-verify="required">
+                <option value="">请选择市</option>
+              </select>
+            </div>
+            <div class="layui-input-inline" style="width: 20%">
+              <select id="area" name="area" lay-filter="area" required lay-verify="required">
+                <option value="">请选择县/区</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label" for="road">
+                  <span class="x-red">*</span>详细地址
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="road" name="road" required lay-verify="required"
+                  required lay-verify="required" placeholder="请输入详细地址" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label" for="note">
+                  备注
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="note" name="note" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" name="store-add" lay-submit="">
+                  添加仓库
+              </button>
+          </div>
+      </form>
+    </div>
+    <script type="text/javascript" src="../js/xcity.js"></script>
+    <script type="text/javascript" src="../js/form.js"></script>
+    <script>
+      layui.use(['form','code'], function(){
+        form = layui.form;
+
+        layui.code();
+        // 选中的值
+        $('#x-city').xcity('安徽','宣城市','宣州区');
+
+      });
+    </script>
+  </body>
+
+</html>
