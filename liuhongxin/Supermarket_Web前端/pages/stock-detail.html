@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>库存详细-超市管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+  </head>
+  
+  <body class="layui-layout-body">
+    <!-- 刷新 -->
+    <div>
+      <a class="layui-btn" style="margin-top:3px;float:right" 
+      href="javascript:location.replace(location.href);">
+        <i class="layui-icon layui-icon-refresh"></i>
+      </a>
+      <hr class="layui-bg-green">
+    </div>
+    <!-- 主体 -->
+    <div class="layui-fluid">
+      <!-- 标题 -->
+      <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+          <legend>商品：000001百事可乐</legend>
+          <legend>库存数量：1234</legend>
+      </fieldset>
+      <!-- 自动渲染表格 -->
+      <table id="stock-goods-list" lay-filter="stock-goods-list"></table>
+      <!-- 表格操作栏 -->
+      <script type="text/html" id="update">
+        <button class="layui-btn layui-btn-xs" lay-event="update">
+            <i class="layui-icon layui-icon-edit"></i>更新
+        </button>
+      </script>
+    </div>
+
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/form.js"></script>
+
+<script>
+
+  // layui-use
+  layui.use(['table','form'], function(){
+    var table = layui.table;
+    var form = layui.form;
+    
+    // 表格数据接口 
+    var stock_data = [
+      {"storeID":"400001新安仓","supplierID":"3000001饮品供应商","produceID":"20200101","stockNum":"1234","note":"库存充足"}
+      ,{"storeID":"400001新安仓","supplierID":"3000001饮品供应商","produceID":"20200101","stockNum":"1234","note":"库存充足"}
+      ,{"storeID":"400002敬亭仓","supplierID":"3000001饮品供应商","produceID":"20200101","stockNum":"1234","note":"库存充足"}
+    ];
+
+    //表格设置
+    table.render({
+      elem: '#stock-goods-list'
+      ,totalRow: true
+      ,toolbar: '#toolbar'
+      ,defaultToolbar: ['filter', 'exports', 'print', {
+        title: '帮助'
+        ,layEvent: 'LAYTABLE_TIPS'
+        ,icon: 'layui-icon-tips'
+      }]
+      //,width: 900
+      //,height: 274
+      ,cols: [[ //标题栏
+        {field: 'supplierID', title: '供应商', sort: true, totalRowText: '合计：10'}
+        ,{field: 'produceID', title: '生产批号', sort: true, totalRowText: '3'}
+        ,{field: 'storeID', title: '仓库', sort: true, totalRowText: '2'}
+        ,{field: 'stockNum', title: '库存数量', sort: true, totalRow: true, edit: 'text'}
+        ,{field: 'note', title: '备注', edit: 'text'}
+        ,{fixed: 'right', title:'操作', toolbar: '#update'}
+      ]]
+      ,data: stock_data
+
+      ,skin: 'row' //表格风格
+      ,even: true
+      //,size: 'lg' //尺寸
+      
+      ,page: { //详细参数可参考 laypage 组件文档
+        layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'] //自定义分页布局
+      }
+      ,limits: [10,20,50]
+      ,limit: 10 //每页默认显示的数量
+      //,loading: false //请求数据时，是否显示loading
+      ,done: function (res, curr, count) {
+        $(".layui-table-total div").each(function (i,item) {
+          var div_text = $(item).html();
+          var value; //转换后的值
+          if(div_text != "") {
+            var value = parseInt(div_text);
+            if(!isNaN(value)) {
+              $(item).html(parseInt(div_text));
+            }
+          }
+        });
+      }
+
+    });
+    //监听行工具事件，删除单项表格
+    table.on('tool(stock-goods-list)', function(obj){
+      var data = obj.data;
+      // console.log(obj);
+      if(obj.event == 'update'){
+        layer.confirm('确定提交该项更新吗？', function(index){
+          // console.log(data);
+          // layer.msg('已更新!',{icon:1,time:1000});
+          layer.close(index);
+          // 提交更新
+          // window.location.href = "action-edit.php?instock-update="+JSON.stringify(data);
+        });
+      }
+
+    });
+    
+    
+
+ });
+</script>
+
+  </body>
+
+</html>

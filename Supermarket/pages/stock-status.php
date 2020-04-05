@@ -1,0 +1,213 @@
+<?php
+    include '../config/dbcon.php';
+    
+    //不同功能，不同查询语句
+    if(isset($_POST['stock-search'])){
+        //根据商品ID查询
+        $sql = "select * from stock where goodsID ='{$_POST['goodsID']}'";
+    }else{
+        $sql = "select * from stock";
+    }
+    $query = mysqli_query($con,$sql);
+    //商品种类数
+    $nums = mysqli_num_rows($query);
+    $rows = mysqli_fetch_all($query,MYSQLI_ASSOC);
+    
+    //搜索失败
+    if($rows == NULL){
+       echo "<script>alert('查询失败，此商品ID不存在');window.location.href='stock-status.php';</script>";  
+    }else{
+        //传给js
+        $new_data = array();
+        foreach ($rows as $row) {
+            $tem_data = array();
+            $tem_data['goodsID'] = $row['goodsID'];
+            $tem_data['goodsName'] = $row['goodsName'];
+            $tem_data['goodsPrice'] = $row['goodsPrice'];
+            $tem_data['goodsType'] = $row['goodsType'];
+            $tem_data['goodsSpecs'] = $row['goodsSpecs'];
+            $tem_data['stockTotal'] = $row['stockTotal'];
+            $tem_data['stockMax'] = $row['stockMax'];
+            $tem_data['stockAlarm'] = $row['stockAlarm'];
+            $tem_data['note'] = $row['note'];
+            $new_data[]=$tem_data;
+        }
+    }
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>库存状态-超市管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/xadmin.css">
+    
+    <script src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/xadmin.js"></script>
+  </head>
+  
+  <body class="layui-layout-body">
+    <!-- 刷新 -->
+    <div>
+      <a class="layui-btn" style="margin-top:3px;float:right" 
+      href="javascript:location.replace(location.href);">
+        <i class="layui-icon layui-icon-refresh"></i>
+      </a>
+      <hr class="layui-bg-green">
+    </div>
+    <!-- 主体 -->
+    <div class="layui-fluid">
+      <!-- 查询 -->
+      <div class="layui-row">
+          <form class="layui-form layui-col-md12" style="text-align: center;" action="stock-status.php" method="post">
+          <div class="layui-input-inline">
+            <input class="layui-input" name="goodsID"  placeholder="商品ID" lay-verify="goodsID">
+          </div>
+          <div class="layui-input-inline">
+            <button class="layui-btn"  lay-submit lay-filter="sreach" name = "stock-search">
+            <i class="layui-icon layui-icon-search"></i>
+          </button>
+          </div>
+        </form>
+      </div>
+      <!-- 自动渲染表格 -->
+      <table id="stock-goods-list" lay-filter="stock-goods-list"></table>
+      <!-- 表格操作栏 -->
+      <script type="text/html" id="detail">
+        <button class="layui-btn layui-btn-xs" lay-event="detail">
+            <i class="layui-icon layui-icon-list"></i>详细库存
+        </button>
+      </script>
+      <!-- toolbar -->
+      <script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+          <button class="layui-btn layui-btn-radius" lay-event="instock">
+            <i class="layui-icon layui-icon-form"></i>商品入库
+          </button>
+          <button class="layui-btn layui-btn-radius" lay-event="outstock">
+            <i class="layui-icon layui-icon-form"></i>商品出库
+          </button>
+          <button class="layui-btn layui-btn-radius" lay-event="check">
+            <i class="layui-icon layui-icon-survey"></i>库存盘点
+          </button>
+        </div>
+      </script>
+    </div>
+
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/form.js"></script>
+
+<script>
+
+  // layui-use
+  layui.use(['table','form'], function(){
+    var table = layui.table;
+    var form = layui.form;
+    
+    // 表格数据接口 
+    var stock_data =<?php echo json_encode($new_data);?>; 
+
+    //表格设置
+    table.render({
+      elem: '#stock-goods-list'
+      ,totalRow: true
+      ,toolbar: '#toolbar'
+      ,defaultToolbar: ['filter', 'exports', 'print', {
+        title: '帮助'
+        ,layEvent: 'LAYTABLE_TIPS'
+        ,icon: 'layui-icon-tips'
+      }]
+      //,width: 900
+      //,height: 274
+      ,cols: [[ //标题栏
+        {field: 'goodsID', title: '商品ID', sort: true, totalRowText: '合计：'}
+        ,{field: 'goodsName', title: '名称',  totalRowText: '<?php echo $nums;?>'}
+        ,{field: 'goodsPrice', title: '价格', sort: true}
+        ,{field: 'goodsType', title: '类别'}
+        ,{field: 'goodsSpecs', title: '规格'}
+        ,{field: 'stockTotal', title: '库存数量', sort: true, totalRow: true}
+        ,{field: 'stockMax', title: '最大容量', sort: true}
+        ,{field: 'stockAlarm', title: '库存警报', sort: true}
+        ,{field: 'note', title: '备注', edit: 'text'}
+        ,{fixed: 'right', title:'操作', toolbar: '#detail'}
+      ]]
+      ,data: stock_data
+
+      ,skin: 'row' //表格风格
+      ,even: true
+      //,size: 'lg' //尺寸
+      
+      ,page: { //详细参数可参考 laypage 组件文档
+        layout: ['prev', 'page', 'next', 'count', 'limit', 'skip'] //自定义分页布局
+      }
+      ,limits: [6,10,20]
+      ,limit: 6 //每页默认显示的数量
+      //,loading: false //请求数据时，是否显示loading
+      ,done: function (res, curr, count) {
+        $(".layui-table-total div").each(function (i,item) {
+          var div_text = $(item).html();
+          var value; //转换后的值
+          if(div_text != "") {
+            var value = parseInt(div_text);
+            if(!isNaN(value)) {
+              $(item).html(parseInt(div_text));
+            }
+          }
+        });
+      }
+
+    });
+    //监听行工具事件，删除单项表格
+    table.on('tool(stock-goods-list)', function(obj){
+      var data = obj.data;
+      // console.log(obj);
+      var id = data.goodsID;
+      var total = data.stockTotal;
+      if(obj.event == 'detail'){
+        x_admin_show('详细库存','stock-detail.php?goodsID='+id+'&total='+total,'1000','600');
+        // console.log('stock-detail.html?goodsID='+id+'&total='+total);
+      }
+
+    });
+    
+    //监听工具栏事件
+    table.on('toolbar(stock-goods-list)', function(obj){
+      // var checkStatus = table.checkStatus(obj.config.id);
+      // console.log(obj);
+      switch(obj.event){
+        case 'instock':
+          layer.confirm('确定填写入库单吗？', function(index){
+            layer.close(index);
+            // window.location.href = "instock-goods.html";
+            x_admin_show('添加入库单','instock-goods.php','1300','600');
+          });
+        break;
+        case 'outstock':
+          layer.confirm('确定填写出库单吗？', function(index){
+            // var data = checkStatus.data;
+            //显示获取的数据
+            // layer.alert(JSON.stringify(data));
+            layer.close(index);
+            // window.location.href = "outstock-goods.html";
+            x_admin_show('添加出库单','outstock-goods.php','1300','600');
+          });
+        break;
+        case 'check':
+          layer.confirm('确定盘点库存吗？', function(index){
+            // var data = checkStatus.data;
+            //显示获取的数据
+            // layer.alert(JSON.stringify(data));
+            layer.close(index);
+            x_admin_show('添加出库单','check-goods.php','1300','600');
+          });
+        break;
+
+      };
+    });
+
+ });
+</script>
+
+  </body>
+
+</html>

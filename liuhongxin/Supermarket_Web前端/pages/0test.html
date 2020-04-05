@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>商品联动-超市后台管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+  </head>
+  
+  <body>
+    <div style="margin: 100px 100px 100px 100px;">
+        <form class="layui-form">
+            <div class="layui-form-item" id="tb_produce">
+                <div class="layui-input-inline">
+                  <select name="goodsID" lay-filter="goods" lay-verify="required" lay-search> 
+                    <option value="">请选择省</option>
+                  </select>
+                </div>
+                <div class="layui-input-inline">
+                  <select name="supplierID" lay-filter="supplier" lay-verify="required" lay-search>
+                    <option value="">请选择市</option>
+                  </select>
+                </div>
+                <div class="layui-input-inline">
+                  <select name="produceID" lay-filter="produce" lay-verify="required" lay-search>
+                    <option value="">请选择县/区</option>
+                  </select>
+                </div>
+                <div class="layui-input-inline">
+                  <button class="layui-btn" lay-filter="add" lay-submit>
+                    添加
+                  </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="../js/produce.js"></script>
+    <script>
+      layui.use(['form','code'], function(){
+        form = layui.form;
+
+        layui.code();
+        // 选中的值
+        $('#tb_produce').goodsProduce();
+        // $('#produce').goodsProduce('安徽','宣城市','宣州区');
+
+      });
+
+    </script>
+    
+  </body>
+
+</html>
