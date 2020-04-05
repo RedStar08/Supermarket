@@ -95,7 +95,7 @@ DELIMITER $$
 DROP view IF EXISTS `stock`$$
 create view stock as 
 select tb_stock.goodsID,goodsName,goodsPrice,goodsType,goodsSpecs,sum(stockNum) as stockTotal,
-stockMax,stockAlarm,tb_stock.note
+sum(stockMax) as stockMax,stockAlarm,tb_stock.note
 from tb_stock,tb_goods
 where tb_stock.goodsID=tb_goods.goodsID
 group by tb_goods.goodsID
