@@ -4,11 +4,12 @@
     if(empty($_SESSION['uid'])){
         header('Location:login.php');
     }else{
-        $un = $_SESSION['un'];
+        $uname = $_SESSION['uname'];
+        $utype = $_SESSION['utype'];
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
 	<title>主页-超市管理系统</title>
@@ -58,7 +59,7 @@
            <!-- 用户信息 -->
           <li class="layui-nav-item">
             <a href="javascript:;" style="font-size:16px;color: gold;">
-                <?php echo htmlspecialchars($un);?>
+                <?php echo htmlspecialchars($uname);?>
             </a>
             <dl class="layui-nav-child">
             <!-- 二级菜单 -->
@@ -91,21 +92,27 @@
     <div class="left-nav">
       <div id="side-nav">
         <ul id="nav">
-            <li >
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe696;</i>
-                    <cite>主页</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="welcome.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>控制台</cite>
+            <?php 
+                if($utype == 1 || $utype == 2) {
+                    echo '
+                    <!-- 主页-控制台 -->
+                    <li >
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe696;</i>
+                            <cite>主页</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                </ul>
-            </li>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="welcome.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>控制台</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>';
+                }
+            ?>
             <!-- 商品管理 -->
             <li >
                 <a href="javascript:;">
@@ -134,88 +141,96 @@
                     </li >
                 </ul>
             </li>
-            <!-- 账单管理 -->
-            <li >
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe74e;</i>
-                    <cite>账单管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="sale-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>销售订单</cite>
+            <?php
+                if($utype == 1 || $utype == 2 || $utype == 5) {
+                    echo '
+                    <!-- 账单管理 -->
+                    <li >
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe74e;</i>
+                            <cite>账单管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                    <li>
-                        <a _href="count-daily.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>盈亏状况</cite>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="sale-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>销售订单</cite>
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="count-daily.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>盈亏状况</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>
+                    <!-- 收银系统 -->
+                    <li >
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe702;</i>
+                            <cite>收银系统</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                </ul>
-            </li>
-            <!-- 收银系统 -->
-            <li >
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe702;</i>
-                    <cite>收银系统</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="sale-goods.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>前台零售</cite>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="sale-goods.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>前台零售</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>';
+                }
+                if($utype != 5) {
+                    echo '
+                    <!-- 供应商管理 -->
+                    <li >
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe82a;</i>
+                            <cite>供应商管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                </ul>
-            </li>
-            <!-- 供应商管理 -->
-            <li >
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe82a;</i>
-                    <cite>供应商管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="supplier-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>供应商列表</cite>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="supplier-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>供应商列表</cite>
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="produce-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>供应批次</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>
+                    <!-- 采购管理 -->
+                    <li >
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe698;</i>
+                            <cite>采购管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                    <li>
-                        <a _href="produce-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>供应批次</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <!-- 采购管理 -->
-            <li >
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe698;</i>
-                    <cite>采购管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="buy-goods.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>商品采购</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="buy-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>采购记录</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="buy-goods.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>商品采购</cite>
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="buy-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>采购记录</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>';
+                }
+            ?>
             <!-- 库存管理 -->
             <li >
                 <a href="javascript:;">
@@ -254,28 +269,33 @@
                     </li >
                 </ul>
             </li>
-            <!-- 管理员管理 -->
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
+            <?php 
+                if($utype == 1 || $utype == 2 || $utype == 5) {
+                    echo '
+                    <!-- 管理员管理 -->
                     <li>
-                        <a _href="user-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>员工管理</cite>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe726;</i>
+                            <cite>管理员管理</cite>
+                            <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
-                    </li >
-                    <li>
-                        <a _href="member-list.php">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>   
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="user-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>员工管理</cite>
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="member-list.php">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>会员管理</cite>
+                                </a>
+                            </li >
+                        </ul>
+                    </li>';
+                }
+            ?>  
             <!-- 系统设置 -->
             <li>
                 <a href="javascript:;">

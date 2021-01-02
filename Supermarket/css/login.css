@@ -1,11 +1,11 @@
 body {
-	width: 100%;
+	width: 98%;
 	height: 600px;
 	/*background: radial-gradient(#fff, #20222A); */
 	background: url("../images/bg.jpg") 0 0 repeat;
 	font-family: "microsoft", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	/* -webkit-font-smoothing: antialiased; */
+	/* -moz-osx-font-smoothing: grayscale; */
 }
 .login-page {
 	width: 420px;

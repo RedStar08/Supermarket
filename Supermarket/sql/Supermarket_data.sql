@@ -16,27 +16,27 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ********用户测试数据********
 -- Records of tb_user
 -- ----------------------------
-INSERT INTO `tb_user` VALUES ('admin',  'admin',  'admin',  '男', '23', '1', '数据库管理员', '18856310000', '数据库测试');
-INSERT INTO `tb_user` VALUES ('100000', 'admin','RedStar08','男', '23', '1', '数据库管理员', '18856310000', '系统测试');
-INSERT INTO `tb_user` VALUES ('100001', '123456', '小刘',   '男', '23', '2', '店长',         '18856310001', 'Web前端');
-INSERT INTO `tb_user` VALUES ('100002', '123456', '小林',   '男', '20', '4', '仓库管理员',   '18856310002', '数据库');
-INSERT INTO `tb_user` VALUES ('100003', '123456', '小周',   '女', '21', '5', '收银员',       '18856310003', 'Web后端');
-INSERT INTO `tb_user` VALUES ('100004', '123456', '朱明露', '男', '22', '3', '采购员',       '18856310004', '');
-INSERT INTO `tb_user` VALUES ('100005', '123456', '杨凤美', '女', '23', '4', '仓库管理员',   '18856310005', '');
-INSERT INTO `tb_user` VALUES ('100006', '123456', '曹景燕', '男', '24', '4', '仓库管理员',   '18856310006', '');
-INSERT INTO `tb_user` VALUES ('100007', '123456', '奚黛',   '女', '25', '4', '仓库管理员',   '18856310007', '');
-INSERT INTO `tb_user` VALUES ('100008', '123456', '王玉凤', '女', '26', '4', '仓库管理员',   '18856310008', '');
-INSERT INTO `tb_user` VALUES ('100009', '123456', '何纨',   '男', '27', '5', '收银员',       '18856310009', '');
-INSERT INTO `tb_user` VALUES ('100010', '123456', '张欢',   '男', '28', '5', '收银员',       '18856310010', '');
-INSERT INTO `tb_user` VALUES ('100011', '123456', '朱明露', '男', '29', '5', '收银员',       '18856310011', '');
-INSERT INTO `tb_user` VALUES ('100012', '123456', '吴良翠', '女', '30', '5', '收银员',       '18856310012', '');
-INSERT INTO `tb_user` VALUES ('100013', '123456', '姜传敏', '男', '31', '4', '仓库管理员',   '18856310013', '');
-INSERT INTO `tb_user` VALUES ('100014', '123456', '何雪倩', '女', '32', '3', '采购员',       '18856310014', '');
-INSERT INTO `tb_user` VALUES ('100015', '123456', '吕紫君', '男', '33', '3', '采购员',       '18856310015', '');
-INSERT INTO `tb_user` VALUES ('100016', '123456', '韩乐',   '男', '34', '3', '采购员',       '18856310016', '');
-INSERT INTO `tb_user` VALUES ('100017', '123456', '华庆黎', '男', '35', '4', '仓库管理员',   '18856310017', '');
-INSERT INTO `tb_user` VALUES ('100018', '123456', '康春文', '男', '36', '4', '仓库管理员',   '18856310018', '');
-INSERT INTO `tb_user` VALUES ('100019', '123456', '岑朱婷', '女', '37', '4', '仓库管理员',   '18856310019', '');
+INSERT INTO `tb_user` VALUES ('admin',  '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',  'admin',  '男', '23', '1', '数据库管理员', '18856310000', '数据库测试');
+INSERT INTO `tb_user` VALUES ('100000', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','RedStar08','男', '23', '1', '数据库管理员', '18856310000', '系统测试');
+INSERT INTO `tb_user` VALUES ('100001', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '小刘',   '男', '23', '2', '店长',         '18856310001', 'Web前端');
+INSERT INTO `tb_user` VALUES ('100002', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '小林',   '男', '20', '4', '仓库管理员',   '18856310002', '数据库');
+INSERT INTO `tb_user` VALUES ('100003', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '小周',   '女', '21', '5', '收银员',       '18856310003', 'Web后端');
+INSERT INTO `tb_user` VALUES ('100004', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '朱明露', '男', '22', '3', '采购员',       '18856310004', '');
+INSERT INTO `tb_user` VALUES ('100005', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '杨凤美', '女', '23', '4', '仓库管理员',   '18856310005', '');
+INSERT INTO `tb_user` VALUES ('100006', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '曹景燕', '男', '24', '4', '仓库管理员',   '18856310006', '');
+INSERT INTO `tb_user` VALUES ('100007', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '奚黛',   '女', '25', '4', '仓库管理员',   '18856310007', '');
+INSERT INTO `tb_user` VALUES ('100008', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '王玉凤', '女', '26', '4', '仓库管理员',   '18856310008', '');
+INSERT INTO `tb_user` VALUES ('100009', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '何纨',   '男', '27', '5', '收银员',       '18856310009', '');
+INSERT INTO `tb_user` VALUES ('100010', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '张欢',   '男', '28', '5', '收银员',       '18856310010', '');
+INSERT INTO `tb_user` VALUES ('100011', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '朱明露', '男', '29', '5', '收银员',       '18856310011', '');
+INSERT INTO `tb_user` VALUES ('100012', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '吴良翠', '女', '30', '5', '收银员',       '18856310012', '');
+INSERT INTO `tb_user` VALUES ('100013', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '姜传敏', '男', '31', '4', '仓库管理员',   '18856310013', '');
+INSERT INTO `tb_user` VALUES ('100014', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '何雪倩', '女', '32', '3', '采购员',       '18856310014', '');
+INSERT INTO `tb_user` VALUES ('100015', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '吕紫君', '男', '33', '3', '采购员',       '18856310015', '');
+INSERT INTO `tb_user` VALUES ('100016', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '韩乐',   '男', '34', '3', '采购员',       '18856310016', '');
+INSERT INTO `tb_user` VALUES ('100017', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '华庆黎', '男', '35', '4', '仓库管理员',   '18856310017', '');
+INSERT INTO `tb_user` VALUES ('100018', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '康春文', '男', '36', '4', '仓库管理员',   '18856310018', '');
+INSERT INTO `tb_user` VALUES ('100019', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '岑朱婷', '女', '37', '4', '仓库管理员',   '18856310019', '');
 
 -- ----------------------------
 -- ********会员测试数据********

@@ -97,7 +97,7 @@
     //编辑员工表
     else if(isset($_POST['user-edit'])){
         $userID = $_SESSION['userID'];
-        $userPassword = $_POST['userPassword'];
+        $userPassword = hash("sha256",$_POST['userPassword']);
         $userName = $_POST['Name'];
         $userSex = $_POST['userSex'];
         $userAge = $_POST['userAge'];
