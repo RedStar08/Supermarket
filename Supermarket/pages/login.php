@@ -32,13 +32,19 @@
 		$uid = $_POST['user_ID'];
 		$pw = $_POST['user_Password'];
         
+        // 使用 mysqli_escape_string() 函数之前必须调用 mysqli_set_charset 设置字符集
+        mysqli_set_charset($con, "utf8");
+        // 将 post 获取的参数进行转义
+        $escaped_uid = mysqli_escape_string($con, $uid);
+        $escaped_pw = mysqli_escape_string($con, $pw);
+
         //进行查询
-		$query =  mysqli_query($con, "SELECT * FROM tb_user WHERE  userID='$uid'") or die($mysqli_error($con));
+		$query =  mysqli_query($con, "SELECT * FROM tb_user WHERE userID='{$escaped_uid}'") or die($mysqli_error($con));
 
         //获取查询行
         $row = mysqli_fetch_array($query);
         //hash加密
-        $r_pw = hash("sha256", $pw);
+        $r_pw = hash("sha256", $escaped_pw);
 		//字符串对比
         $is_True = strcmp($r_pw, $row['userPassword']);
         //查询完毕，释放结果集
